@@ -1,0 +1,14 @@
+<h1>Welcome.</h1>
+
+<div ng-show="authenticated">
+    <p>The ID is {{controller.benutzer.id}}.</p>
+    <p>The firstname is {{controller.benutzer.firstname}}.</p>
+    <p>The surname is {{controller.benutzer.surname}}.</p>
+    <p>The email is {{controller.benutzer.email}}.</p>
+    <p>The username is {{controller.benutzer.username}}.</p>
+</div>
+
+<div  ng-show="!authenticated">
+    <p>This is the Gatewayservice Landing Page.</p>
+    <p>Please log in to the system using the Login button.</p>
+</div>
