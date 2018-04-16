@@ -120,6 +120,7 @@ public class HistoryserviceController {
     if (itemState == null) {
       throw new InvalidParameterException("Smarthome instance or Smarthome item not found!");
     }
+
     return itemState;
   }
 

@@ -1,6 +1,7 @@
 package pflegeplattform.service.controller;
 
 import com.google.gson.Gson;
+import java.security.InvalidParameterException;
 import java.security.Principal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import pflegeplattform.service.data.entities.SmartHomeAccessInstance;
 import pflegeplattform.service.service.AccessManagerService;
-import sun.plugin.dom.exception.InvalidAccessException;
 
 @RestController
 @RequestMapping(value = "/resources/accesscontrol", produces = "application/json")
@@ -53,11 +53,11 @@ public class AccessController {
   public String addSmartHomeAccessInstance(Principal principal,
       @RequestParam String smartHomeAccessInstanceName) {
     if (!accessManagerService.isUserAdmin(principal.getName())) {
-      throw new InvalidAccessException("Only Admins are allowed to add new instances.");
+      throw new InvalidParameterException("Only Admins are allowed to add new instances.");
     }
 
     if (accessManagerService.smartHomeAccessInstanceExists(smartHomeAccessInstanceName)) {
-      throw new InvalidAccessException("An instance with this name already exists.");
+      throw new InvalidParameterException("An instance with this name already exists.");
     }
 
     SmartHomeAccessInstance smartHomeAccessInstance =
@@ -73,11 +73,11 @@ public class AccessController {
       @RequestParam String itemName,
       @RequestParam String accessName) {
     if (!accessManagerService.isUserAdmin(principal.getName())) {
-      throw new InvalidAccessException("Only Admins are allowed to add new permissions.");
+      throw new InvalidParameterException("Only Admins are allowed to add new permissions.");
     }
 
     if (!accessManagerService.smartHomeAccessInstanceExists(instanceName)) {
-      throw new InvalidAccessException("This smarthomeinstance des not exist.");
+      throw new InvalidParameterException("This smarthomeinstance des not exist.");
     }
 
     SmartHomeAccessInstance smartHomeAccessInstance =
@@ -94,11 +94,11 @@ public class AccessController {
       @RequestParam String itemName,
       @RequestParam String accessName) {
     if (!accessManagerService.isUserAdmin(principal.getName())) {
-      throw new InvalidAccessException("Only Admins are allowed to add new permissions.");
+      throw new InvalidParameterException("Only Admins are allowed to add new permissions.");
     }
 
     if (!accessManagerService.smartHomeAccessInstanceExists(instanceName)) {
-      throw new InvalidAccessException("This smarthomeinstance des not exist.");
+      throw new InvalidParameterException("This smarthomeinstance des not exist.");
     }
 
     SmartHomeAccessInstance smartHomeAccessInstance =
