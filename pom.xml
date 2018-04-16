@@ -11,11 +11,8 @@
         <module>eurekaserver</module>
         <module>usermanagementservice</module>
         <module>gatewayservice</module>
-        <module>resourceservice</module>
         <module>authenticationservice</module>
         <module>history-service</module>
-        <module>demo-service</module>
-        <module>control-service</module>
         <module>AccessControlService</module>
     <module>RemoteAccessService</module>
   </modules>
