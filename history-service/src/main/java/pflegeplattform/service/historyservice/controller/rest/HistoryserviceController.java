@@ -13,7 +13,6 @@ import pflegeplattform.service.historyservice.entities.EshInstance;
 import pflegeplattform.service.historyservice.entities.RepresentativeStateItem;
 import pflegeplattform.service.historyservice.service.HistoryService;
 import pflegeplattform.service.historyservice.service.consumer.AccessControlFeignClient;
-import sun.plugin.dom.exception.InvalidAccessException;
 
 
 @RestController
@@ -92,7 +91,7 @@ public class HistoryserviceController {
   public String getItemStates(@PathVariable("instanceName") String instanceName,
       @PathVariable("itemName") String itemName) {
     if (!accessControlFeignClient.hasReadAccess(instanceName, itemName)) {
-      throw new InvalidAccessException("No access to this information.");
+      throw new InvalidParameterException("No access to this information.");
     }
 
     String eshItems = historyService.getLatestItemState(instanceName, itemName);
@@ -114,7 +113,7 @@ public class HistoryserviceController {
       @PathVariable("instanceName") String instanceName,
       @PathVariable("itemName") String itemName, Principal principal) {
     if (!accessControlFeignClient.hasReadAccess(instanceName, itemName)) {
-      throw new InvalidAccessException("No access to this information.");
+      throw new InvalidParameterException("No access to this information.");
     }
     String itemState = historyService.getLatestItemState(instanceName, itemName);
 

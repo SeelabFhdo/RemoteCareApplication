@@ -1,7 +1,6 @@
 package de.fhdortmund.service.usermanagement.controller;
 
 import com.google.gson.Gson;
-import com.sun.javaws.exceptions.InvalidArgumentException;
 import de.fhdortmund.service.usermanagement.enumeration.UserRole;
 import de.fhdortmund.service.usermanagement.service.UserService;
 import java.security.InvalidParameterException;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import de.fhdortmund.service.usermanagement.entities.User;
 
 import java.security.Principal;
-import sun.plugin.dom.exception.InvalidAccessException;
 
 
 /**
@@ -50,7 +48,7 @@ public class UserManagementController {
       @RequestParam String userRoleValue) {
 
     if (this.isAdmin(principal.getName()) == false) {
-      throw new InvalidAccessException("Only Admins are allowed to register nur Users.");
+      throw new InvalidParameterException("Only Admins are allowed to register nur Users.");
     }
 
     if (!email.contains("@")) {

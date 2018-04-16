@@ -18,10 +18,10 @@ security:
     password: none
   oauth2:
     client:
-      accessTokenUri: http://172.22.167.123:9999/uaa/oauth/token
-      userAuthorizationUri: http://172.22.167.123:9999/uaa/oauth/authorize
-      #accessTokenUri: http://172.22.167.55:9999/uaa/oauth/token
-      #userAuthorizationUri: http://172.22.167.55:9999/uaa/oauth/authorize
+      ##accessTokenUri: http://172.22.167.123:9999/uaa/oauth/token
+      ##userAuthorizationUri: http://172.22.167.123:9999/uaa/oauth/authorize
+      accessTokenUri: http://192.168.42.13:9999/uaa/oauth/token
+      userAuthorizationUri: http://192.168.42.13:9999/uaa/oauth/authorize
       clientId: client
       clientSecret: password
 
