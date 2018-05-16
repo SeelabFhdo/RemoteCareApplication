@@ -1,14 +1,9 @@
-FROM java
+FROM ewolff/docker-java
 MAINTAINER Philip Wizenty <philipnils.wizenty@fh-dortmund.de>
 
-# update sources
-RUN echo "upgrade apt sources"
-RUN apt-get update
-RUN apt-get upgrade -y
-
 # Add microservice jar-file to container
-ADD target/<Name of Jar File>.jar .
-CMD /usr/bin/java -Xmx400m -Xms400m -jar <Name of Jar File>.jar
+COPY target/remoteaccessservice-0.0.1-SNAPSHOT.jar .
+CMD /usr/bin/java -Xmx400m -Xms400m -jar remoteaccessservice-0.0.1-SNAPSHOT.jar
 
 # Expose Port for Docker
-EXPOSE <Used Ports in Microservice>
+EXPOSE 8085

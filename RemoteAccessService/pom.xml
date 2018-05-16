@@ -4,15 +4,16 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>RemoteAccessService</artifactId>
+  <groupId>remotecare</groupId>
+  <artifactId>remoteaccessservice</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
 
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
     <version>1.4.2.RELEASE</version> <!-- lookup parent from repository -->
   </parent>
-
-  <groupId>de-fh.dortmund</groupId>
 
   <dependencyManagement>
     <dependencies>
@@ -25,8 +26,6 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
-
-  <version>1</version>
 
   <dependencies>
     <dependency>

@@ -1,0 +1,62 @@
+version: '3'
+services:
+  eureka:
+    build: ../eurekaserver
+    ports:
+     - "8761:8761"
+  mongodb:
+    image: mongo:latest
+    ports:
+     - "27017:27017"
+  mysqldb:
+    image: mysql:latest
+    ports:
+     - "3306:3306"
+    environment:
+           MYSQL_ROOT_PASSWORD: password
+           MYSQL_DATABASE: usermanagement
+  authenticationservice:
+    build: ../authenticationservice
+#    links:
+#     - eurekaserver, mysqldb
+    ports:
+     - "9999:9999"
+  usermanagementservice:
+    build: ../usermanagementservice
+#    links:
+#     - eurekaserver, mysqldb, authenticationservice
+    ports:
+      - "9191:9191"
+  accesscontrolservice:
+    build: ../AccessControlService
+#    links:
+#     - eurekaserver, mongodb, usermanagementservice, authenticationservice
+    ports:
+      - "8282:8282"
+  authenticationservice:
+    build: ../authenticationservice
+#    links:
+#     - eurekaserver, mysqldb, authenticationservice
+    ports:
+     - "9999:9999"
+  gatewayservice:
+    build: ../gatewayservice
+#    links:
+#     - eurekaserver, authenticationservice
+    ports:
+     - "8080:8080"
+  historyservice:
+    build: ../history-service
+#    links:
+#     - eurekaserver, mongodb, accesscontrolservice, authenticationservice
+    ports:
+      - "8081:8081"
+  remoteaccessservice:
+    build: ../RemoteAccessService
+#    links:
+#     - eurekaserver, accesscontrolservice, authenticationservice
+    ports:
+      - "8085:8085"
+
+
+

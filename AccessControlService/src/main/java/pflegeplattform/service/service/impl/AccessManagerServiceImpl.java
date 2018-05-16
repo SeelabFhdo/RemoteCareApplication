@@ -81,6 +81,7 @@ public class AccessManagerServiceImpl implements AccessManagerService {
     AccessItem accessItem = getAccessItem(instanceName, itemName, userName);
 
     if (accessItem != null && accessItem.getReadAccessList().contains(userName)) {
+      System.out.println("User has Read Access");
       return true;
     } else {
       return false;
@@ -90,10 +91,18 @@ public class AccessManagerServiceImpl implements AccessManagerService {
 
   @Override
   public boolean hasWriteAccessToItem(String instanceName, String itemName, String userName) {
+    System.out.println("Username" + userName);
     AccessItem accessItem = getAccessItem(instanceName, itemName, userName);
+    System.out.println("Instancename: " + instanceName + " ItemName: " + itemName);
+    if (accessItem == null) {
+      System.out.println("AccessItem is null");
+    }
+
     if (accessItem != null && accessItem.getWriteAccessList().contains(userName)) {
+      System.out.println("User has Write Access");
       return true;
     } else {
+      System.out.println("User has no Write Access");
       return false;
     }
   }

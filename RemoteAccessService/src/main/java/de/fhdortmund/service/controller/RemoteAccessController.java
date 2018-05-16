@@ -30,7 +30,7 @@ public class RemoteAccessController {
       @RequestParam String commandType) {
       String response = "InstanceName: " + instanceName + " | Itemname: " + itemName + " | Command: " + command;
       mqttService.sendAccessControlCommand(instanceName, itemName, command, commandType);
-
+      System.out.println("Action");
       Gson gson = new Gson();
     return gson.toJson(response);
   }

@@ -55,11 +55,14 @@ public class MqttServiceImpl implements MqttService {
   @Override
   public void sendAccessControlCommand(String instanceName, String itemName, String commandValue,
       String commandType) {
-    if (!accessControlFeignClient.checkWriteAccess(instanceName, instanceName)) {
+    log.info("Access: " + accessControlFeignClient.checkWriteAccess(instanceName, instanceName));
+    if (!accessControlFeignClient.checkWriteAccess(instanceName, itemName)) {
+      log.info("User has no Access Right.");
       return;
     }
     if (!mqttClient.isConnected()) {
       connectToBroker();
+      log.info("MQTT Broker Connected: " + mqttClient.isConnected());
     }
     ObjectMapper mapper = new ObjectMapper();
     MqttMessage message = new MqttMessage();
@@ -69,6 +72,7 @@ public class MqttServiceImpl implements MqttService {
     command.setCommandtype(commandType);
     try {
       message.setPayload(mapper.writeValueAsBytes(command));
+      log.info(String.format("%s/%s/command", BASE_TOPIC, instanceName), message);
       mqttClient.publish(String.format("%s/%s/command", BASE_TOPIC, instanceName), message);
     } catch (JsonProcessingException e) {
       e.printStackTrace();
@@ -86,8 +90,7 @@ public class MqttServiceImpl implements MqttService {
       TrustManagerFactory trustManagerFactory = TrustManagerFactory
           .getInstance(TrustManagerFactory.getDefaultAlgorithm());
       KeyStore keyStore = KeyStore.getInstance("JKS");
-      keyStore.load(new FileInputStream(
-              "/home/phil/Dropbox/Dev/MultiuserAssistancePlatform/control-service/client.jks"),
+      keyStore.load(new FileInputStream("client.jks"),
           "password".toCharArray());
       trustManagerFactory.init(keyStore);
       sslContext.init(null, trustManagerFactory.getTrustManagers(), new SecureRandom());

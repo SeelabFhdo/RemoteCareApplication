@@ -39,13 +39,13 @@ public class AccessController {
 
   @GetMapping(value = "/smarthomeaccessinstance/{instanceName}/{itemName}/write")
   @ResponseBody
-  public String checkWriteAccess(Principal principal,
+  public boolean checkWriteAccess(Principal principal,
       @PathVariable String instanceName,
       @PathVariable String itemName) {
 
     Gson gson = new Gson();
-    return gson.toJson(
-        accessManagerService.hasWriteAccessToItem(instanceName, itemName, principal.getName()));
+    return
+        accessManagerService.hasWriteAccessToItem(instanceName, itemName, principal.getName());
   }
 
   @PutMapping(value = "/smarthomeaccessinstance")
